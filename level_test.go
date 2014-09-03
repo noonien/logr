@@ -8,9 +8,9 @@ import (
 
 func TestLevel(t *testing.T) {
 	Convey("Given a Level logger", t, func() {
-		ml := Memory{}
+		q := Queue{}
 		log := &Level{
-			Out: &ml,
+			Out: &q,
 		}
 
 		Convey("It can be used as a Logger", func() {
@@ -28,20 +28,20 @@ func TestLevel(t *testing.T) {
 			log.Debugf("Debugf")
 			log.Debugln("Debugln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debug"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debugf"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debugln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debug"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debugf"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "debug", "message": "Debugln"})
 		})
 		Convey("Calling its Info* methods adds an entry to the output logger", func() {
 			log.Info("Info")
 			log.Infof("Infof")
 			log.Infoln("Infoln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"level": "info", "message": "Info"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "info", "message": "Infof"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "info", "message": "Infoln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"level": "info", "message": "Info"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "info", "message": "Infof"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "info", "message": "Infoln"})
 		})
 
 		Convey("Calling its Warn* methods adds an entry to the output logger", func() {
@@ -49,10 +49,10 @@ func TestLevel(t *testing.T) {
 			log.Warnf("Warnf")
 			log.Warnln("Warnln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warn"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warnf"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warnln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warn"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warnf"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "warn", "message": "Warnln"})
 		})
 
 		Convey("Calling its Error* methods adds an entry to the output logger", func() {
@@ -60,10 +60,10 @@ func TestLevel(t *testing.T) {
 			log.Errorf("Errorf")
 			log.Errorln("Errorln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"level": "error", "message": "Error"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "error", "message": "Errorf"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "error", "message": "Errorln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"level": "error", "message": "Error"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "error", "message": "Errorf"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "error", "message": "Errorln"})
 		})
 
 		Convey("Calling its Panic* methods adds an entry to the output logger and panics", func() {
@@ -71,10 +71,10 @@ func TestLevel(t *testing.T) {
 			So(func() { log.Panicf("Panicf") }, ShouldPanicWith, "Panicf")
 			So(func() { log.Panicln("Panicln") }, ShouldPanicWith, "Panicln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panic"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panicf"})
-			So(ml.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panicln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panic"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panicf"})
+			So(q.Pop(), ShouldResemble, Entry{"level": "panic", "message": "Panicln"})
 		})
 	})
 }

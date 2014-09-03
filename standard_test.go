@@ -8,9 +8,9 @@ import (
 
 func TestStandard(t *testing.T) {
 	Convey("Given a Standard logger", t, func() {
-		ml := Memory{}
+		q := Queue{}
 		log := &Standard{
-			Out: &ml,
+			Out: &q,
 		}
 
 		Convey("It can be used as a Logger", func() {
@@ -28,10 +28,10 @@ func TestStandard(t *testing.T) {
 			log.Printf("Printf")
 			log.Println("Println")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Print"})
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Printf"})
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Println"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"message": "Print"})
+			So(q.Pop(), ShouldResemble, Entry{"message": "Printf"})
+			So(q.Pop(), ShouldResemble, Entry{"message": "Println"})
 
 		})
 
@@ -40,10 +40,10 @@ func TestStandard(t *testing.T) {
 			So(func() { log.Panicf("Panicf") }, ShouldPanicWith, "Panicf")
 			So(func() { log.Panicln("Panicln") }, ShouldPanicWith, "Panicln")
 
-			So(ml.Len(), ShouldEqual, 3)
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Panic"})
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Panicf"})
-			So(ml.Pop(), ShouldResemble, Entry{"message": "Panicln"})
+			So(q.Len(), ShouldEqual, 3)
+			So(q.Pop(), ShouldResemble, Entry{"message": "Panic"})
+			So(q.Pop(), ShouldResemble, Entry{"message": "Panicf"})
+			So(q.Pop(), ShouldResemble, Entry{"message": "Panicln"})
 		})
 	})
 }

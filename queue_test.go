@@ -6,9 +6,9 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-func TestMemory(t *testing.T) {
-	Convey("Given a Memory logger", t, func() {
-		log := &Memory{}
+func TestQueue(t *testing.T) {
+	Convey("Given a Queue logger", t, func() {
+		log := &Queue{}
 
 		Convey("It can be used as a Logger", func() {
 			_, ok := interface{}(log).(Logger)

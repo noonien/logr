@@ -8,9 +8,9 @@ import (
 
 func TestSync(t *testing.T) {
 	Convey("Given a Sync logger", t, func() {
-		ml := Memory{}
+		q := Queue{}
 		log := &Sync{
-			Out: &ml,
+			Out: &q,
 		}
 
 		Convey("It can be used as a Logger", func() {
@@ -26,7 +26,7 @@ func TestSync(t *testing.T) {
 		Convey("It forwards the enty to the output", func() {
 			entry := Entry{"test": "test"}
 			log.Log(entry)
-			So(ml.Peek(), ShouldEqual, entry)
+			So(q.Peek(), ShouldEqual, entry)
 		})
 	})
 }

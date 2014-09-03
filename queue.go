@@ -1,28 +1,28 @@
 package logr
 
-type Memory struct {
+type Queue struct {
 	entries []Entry
 }
 
-func (l *Memory) Log(e Entry) {
+func (l *Queue) Log(e Entry) {
 	if e == nil {
 		return
 	}
 	l.entries = append(l.entries, e)
 }
 
-func (l *Memory) Len() int {
+func (l *Queue) Len() int {
 	return len(l.entries)
 }
 
-func (l *Memory) Peek() Entry {
+func (l *Queue) Peek() Entry {
 	if len(l.entries) == 0 {
 		return nil
 	}
 	return l.entries[0]
 }
 
-func (l *Memory) Pop() Entry {
+func (l *Queue) Pop() Entry {
 	if len(l.entries) == 0 {
 		return nil
 	}
