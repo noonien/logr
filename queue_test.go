@@ -42,6 +42,11 @@ func TestQueue(t *testing.T) {
 				So(log.Peek(), ShouldBeNil)
 			})
 
+			Convey("The entry should be removed by Clear", func() {
+				log.Clear()
+				So(log.Len(), ShouldEqual, 0)
+			})
+
 			Convey("Entries are returned in a FIFO order", func() {
 				entry2 := Entry{"test2": "test2"}
 				log.Log(entry2)

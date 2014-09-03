@@ -30,3 +30,7 @@ func (l *Queue) Pop() Entry {
 	l.entries = l.entries[1:]
 	return e
 }
+
+func (l *Queue) Clear() {
+	l.entries = nil
+}
