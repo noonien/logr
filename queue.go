@@ -11,6 +11,15 @@ func (l *Queue) Log(e Entry) {
 	l.entries = append(l.entries, e)
 }
 
+func (l *Queue) LogBatch(e []Entry) {
+	for _, entry := range e {
+		if entry == nil {
+			continue
+		}
+		l.entries = append(l.entries, entry)
+	}
+}
+
 func (l *Queue) Len() int {
 	return len(l.entries)
 }
