@@ -6,7 +6,7 @@ import (
 )
 
 type Buffer struct {
-	Out      Logger
+	Out      BatchLogger
 	Entries  int
 	Interval time.Duration
 
@@ -67,11 +67,7 @@ func (l *Buffer) forward() {
 		return
 	}
 
-	// Forward entries
-	for _, e := range l.e {
-		l.Out.Log(e)
-	}
-
-	// Clear entries
+	// Forward and clearentries
+	l.Out.LogBatch(l.e)
 	l.e = nil
 }
