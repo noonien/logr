@@ -9,10 +9,6 @@ type Sync struct {
 }
 
 func (l *Sync) Log(e Entry) {
-	if l.Out == nil {
-		return
-	}
-
 	l.mu.Lock()
 	l.Out.Log(e)
 	l.mu.Unlock()

@@ -61,12 +61,6 @@ func (l *Buffer) forward() {
 		l.qc <- struct{}{}
 	}
 
-	// Just return if there's nothing to forward to
-	if l.Out == nil {
-		l.e = nil
-		return
-	}
-
 	// Forward and clearentries
 	l.Out.LogBatch(l.e)
 	l.e = nil

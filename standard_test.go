@@ -18,9 +18,9 @@ func TestStandard(t *testing.T) {
 			So(ok, ShouldEqual, true)
 		})
 
-		Convey("It doesn't panic when an output is not assigned", func() {
+		Convey("It should panic when an output is not assigned", func() {
 			log.Out = nil
-			So(func() { log.Log(nil) }, ShouldNotPanic)
+			So(func() { log.Log(nil) }, ShouldPanic)
 		})
 
 		Convey("Calling its Print* methods adds an entry to the output logger", func() {

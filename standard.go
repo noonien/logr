@@ -10,9 +10,7 @@ type Standard struct {
 }
 
 func (l *Standard) Log(e Entry) {
-	if l.Out != nil {
-		l.Out.Log(e)
-	}
+	l.Out.Log(e)
 }
 
 func (l *Standard) log(s string) {

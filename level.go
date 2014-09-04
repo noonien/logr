@@ -10,9 +10,7 @@ type Level struct {
 }
 
 func (l *Level) Log(e Entry) {
-	if l.Out != nil {
-		l.Out.Log(e)
-	}
+	l.Out.Log(e)
 }
 
 func (l *Level) log(lvl, s string) {

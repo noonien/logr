@@ -23,10 +23,10 @@ func TestBuffer(t *testing.T) {
 			So(func() { log.Log(nil) }, ShouldPanic)
 		})
 
-		Convey("It doesn't panic when an output is not assigned", func() {
+		Convey("It should panic when an output is not assigned", func() {
 			log.Out = nil
 			log.Entries = 1
-			So(func() { log.Log(nil) }, ShouldNotPanic)
+			So(func() { log.Log(nil) }, ShouldPanic)
 		})
 
 		Convey("It should forward entries only when maximum count has been reached", func() {
